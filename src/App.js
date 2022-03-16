@@ -24,6 +24,7 @@ function App() {
           setBanks(value);
           localStorage.setItem(city, JSON.stringify(value));
           localStorage.setItem("currentCity", "BENGALURU");
+          localStorage.setItem("time-stamp",Date.now());
           setLoading(false);
         })
       }

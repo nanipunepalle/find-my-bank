@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import APIService from "../APIs/APIService";
-import MobileRowView from "../Components/MobileRowView";
-import Pagination from "../Components/Pagination";
-import "./TableView.css";
+import MobileRowView from "./MobileRowView";
+import Pagination from "./Pagination";
+import "./FavoritesTableView.css";
 
 
 function TableView(props) {
@@ -18,32 +18,24 @@ function TableView(props) {
     const [pagination, setPagination] = React.useState({ lower: 1, upper: 10 });
     const { lower, upper } = pagination;
     // var favorites = null;
-    
+
 
 
     React.useEffect(() => {
         const banks = localStorage.getItem(city)
-        if(banks){
-            setBankList(JSON.parse(banks));
+        if (banks) {
+            // setBankList(JSON.parse(banks));
             // setFilteredBankList(JSON.parse(banks))
         }
-        if(localStorage.getItem("favorites")!=null){
+        if (localStorage.getItem("favorites") != null) {
             var favorites = JSON.parse(localStorage.getItem("favorites"));
-            if(favorites[city]!=null){
+            if (favorites[city] != null) {
                 const b = JSON.parse(banks);
-                setFilteredBankList(b.filter((val)=>{return favorites[city].includes(val.ifsc)}));
+                setFilteredBankList(b.filter((val) => { return favorites[city].includes(val.ifsc) }));
+                setBankList(b.filter((val) => { return favorites[city].includes(val.ifsc) }));
             }
         }
-        // APIService.getBankData(city, (response) => {
-        //     if (response.status === 200) {
-        //         response.json().then(value => {
-        //             setBankList(value);
-        //             localStorage.setItem(city,JSON.stringify(value));
-        //             localStorage.setItem("currentCity", city);
-        //             setFilteredBankList(value);
-        //         })
-        //     }
-        // })
+        
         return () => {
             setBankList([]);
             setFilteredBankList([]);
@@ -67,9 +59,9 @@ function TableView(props) {
         setFilteredBankList(bankList.filter(bank => { return bank[searchCategory.toLowerCase()].toString().includes(e.target.value.toUpperCase()) }))
     }
 
-    const handleRowClick = (ifsc_code) => ()=> {
-        localStorage.setItem("currentCity",city)
-        navigate("/find-my-bank/bank-details/"+ifsc_code)
+    const handleRowClick = (ifsc_code) => () => {
+        localStorage.setItem("currentCity", city)
+        navigate("/find-my-bank/bank-details/" + ifsc_code)
     }
 
     return (
@@ -83,12 +75,12 @@ function TableView(props) {
                             return (<option key={val} value={val} id={val}>{val}</option>)
                         })}
                     </select>
-                    <select disabled={true} name="category" id="category" onChange={handleCategoryChange}>
+                    <select  name="category" id="category" onChange={handleCategoryChange}>
                         {APIService.categories.map((val) => {
                             return (<option key={val} value={val} id={val}>{val.toUpperCase()}</option>)
                         })}
                     </select>
-                    <input disabled={true} className="search-field" type="text" id="search-field" placeholder="search" onChange={handleSearchInputChange}></input>
+                    <input className="search-field" type="text" id="search-field" placeholder="search" onChange={handleSearchInputChange}></input>
                 </div>
             </div>
 
@@ -123,6 +115,19 @@ function TableView(props) {
                 </div>
             </div>
             <div className="mobile-div">
+                <div className="mobile-filter-sub-div">
+                    <select name="banks" id="banks" value={city} onChange={handleBankCityChange}>
+                        {APIService.cities.map((val) => {
+                            return (<option key={val} value={val} id={val}>{val}</option>)
+                        })}
+                    </select>
+                    <select name="category" id="category" onChange={handleCategoryChange}>
+                        {APIService.categories.map((val) => {
+                            return (<option key={val} value={val} id={val}>{val.toUpperCase()}</option>)
+                        })}
+                    </select>
+                    <input className="search-field" type="text" id="search-field" placeholder="search" onChange={handleSearchInputChange}></input>
+                </div>
                 <div>
                     {
                         filteredBankList.slice(lower - 1, upper).map(val => {

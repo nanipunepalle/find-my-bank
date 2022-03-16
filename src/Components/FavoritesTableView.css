@@ -1,12 +1,9 @@
-
 :root {
     --green: #00C897;
-    --white: #ffffff; 
+    --white: #ffffff;
 }
 
-.root-div {
-    
-}
+.root-div {}
 
 .filter-div {
     padding-bottom: 25px;
@@ -25,6 +22,7 @@
     height: 70vh;
     width: 100%;
 }
+
 .table-div {
     width: 100%;
     height: 100%;
@@ -41,12 +39,12 @@ table {
 
 th {
     position: -webkit-sticky;
-    position:sticky;
-    top:0px;
+    position: sticky;
+    top: 0px;
     background-color: var(--green);
 }
 
-th,td {
+th, td {
     padding: 10px;
     text-align: center;
     border-bottom: 2px solid #ddd;
@@ -74,7 +72,10 @@ select {
     margin: 5px;
 }
 
-
+.mobile-filter-sub-div {
+    display: block;
+    text-align: center;
+}
 
 .search-field {
     font-size: small;
@@ -88,8 +89,9 @@ select {
     color: black;
     border-radius: 10px;
     padding: 5px;
-    margin: 5px; 
+    margin: 5px;
 }
+
 .mobile-div {
     display: none;
 }
@@ -112,9 +114,11 @@ select {
     .table-root-div {
         display: none;
     }
+
     .mobile-div {
         display: block;
     }
+
     .filter-sub-div {
         display: none;
     }

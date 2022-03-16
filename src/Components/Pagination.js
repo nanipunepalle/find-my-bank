@@ -33,13 +33,13 @@ function Pagination(props) {
         <React.Fragment>
             <div className="pagination-root">
                 <p className="inline txt">Rows per page: <span><input type="number" onChange={handleRowsInput} value={rowsPerPage} style={{ width: "50px" }}></input></span></p>
-                <IconButton>
-                    <ChevronLeftIcon className="inline arrow-button" onClick={handlePrevButton} fontSize="large"></ChevronLeftIcon>
+                <IconButton onClick={handlePrevButton}>
+                    <ChevronLeftIcon className="inline arrow-button" fontSize="large"></ChevronLeftIcon>
                 </IconButton>
                 <p className="inline txt">{props.lower + " - " + (props.upper < props.filteredBankList.length ? props.upper : props.filteredBankList.length) + " of " + props.filteredBankList.length}</p>
                 {/* <p className="inline arrow-button" onClick={handleNextButton}><i class='fas fa-angle-right'></i></p> */}
-                <IconButton>
-                    <ChevronRightIcon className="inline arrow-button" onClick={handleNextButton} fontSize="large"></ChevronRightIcon>
+                <IconButton onClick={handleNextButton}>
+                    <ChevronRightIcon className="inline arrow-button" fontSize="large"></ChevronRightIcon>
                 </IconButton>
             </div>
         </React.Fragment>

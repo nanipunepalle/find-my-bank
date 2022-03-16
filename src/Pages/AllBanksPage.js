@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import APIService from "../APIs/APIService";
+import AlertToast from "../Components/AlertToast";
 import MobileRowView from "../Components/MobileRowView";
 import Pagination from "../Components/Pagination";
 import BanksContext from "../Contexts/BanksContext";
@@ -20,6 +21,13 @@ function AllBanksPage(props) {
     const [searchCategory, setSearchCategory] = React.useState("IFSC");
     const [pagination, setPagination] = React.useState({ lower: 1, upper: 10 });
     const { lower, upper } = pagination;
+    const [state, setState] = React.useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+        message: 'success',
+        type: 'error'
+    });
 
 
     React.useEffect(() => {
@@ -60,7 +68,16 @@ function AllBanksPage(props) {
 
     const handleSearchInputChange = (e) => {
         setPagination({ lower: 1, upper: 10 });
-
+        if(searchCategory==="IFSC"){
+            if(e.target.value.length>11){
+                setState({
+                    ...state,
+                    open: true,
+                    message: "Enter valid ifsc code",
+                    type: "error",
+                })
+            }
+        }
         setFilteredBankList(bankList.filter(bank => { return bank[searchCategory.toLowerCase()].toString().includes(e.target.value.toUpperCase()) }))
     }
 
@@ -71,6 +88,7 @@ function AllBanksPage(props) {
 
     return (
         <div className="root-div">
+            <AlertToast state={state} setState={setState}></AlertToast>
             <div className="filter-div">
                 {/* <p className="inline">All Banks</p> */}
 
@@ -135,6 +153,7 @@ function AllBanksPage(props) {
                     <input className="search-field" type="text" id="search-field" placeholder="search" onChange={handleSearchInputChange}></input>
                 </div>
                 <div>
+                    {loading && <p style={{ textAlign: "center" }}>loading</p>}
                     {
                         filteredBankList.slice(lower - 1, upper).map(val => {
                             return (<MobileRowView key={val.ifsc} bank={val} handleRowClick={handleRowClick(val.ifsc)}></MobileRowView>)

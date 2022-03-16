@@ -1,7 +1,6 @@
-
 :root {
     --green: #00C897;
-    --white: #ffffff; 
+    --white: #ffffff;
 }
 
 .inline {
@@ -13,6 +12,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    /* padding: 0px;
+    margin: 0px; */
 }
 
 .arrow-button {
@@ -25,9 +26,7 @@
         font-size: 30px;
         color: var(--white);
     }
-    .pagination-root {
-        display: block;
-    }
+
     .txt {
         font-size: smaller;
     }

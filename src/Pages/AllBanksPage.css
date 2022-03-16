@@ -5,7 +5,7 @@
 }
 
 .root-div {
-    
+
 }
 
 .filter-div {
@@ -99,7 +99,7 @@ select {
 .mobile-pagination-div {
     position: sticky;
     position: -webkit-sticky;
-    bottom: 10px;
+    bottom: 30px;
     right: 2px;
     left: 2px;
     background-color: var(--green);
