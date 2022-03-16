@@ -14,7 +14,7 @@ function App() {
           <Route exact path="/" element={<Navigate replace to="/all-banks"></Navigate>}></Route>
           <Route exact path="/all-banks" element={<Home></Home>}></Route>
           <Route exact path="/bank-details/:ifsc" element={<BankDetailsPage></BankDetailsPage>}></Route>
-          <Route exact path="*" element={<Navigate replace to="/all-banks"></Navigate>}></Route>
+          <Route exact path="*" element={<Navigate replace to="/"></Navigate>}></Route>
         </Routes>
       </Router>
     </div>
