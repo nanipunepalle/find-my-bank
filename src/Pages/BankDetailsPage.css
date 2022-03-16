@@ -1,0 +1,30 @@
+:root {
+    --green: #00C897;
+    --lightgreen: #00C897;
+    --white: #ffffff; 
+}
+
+.fav-button {
+    float: right;
+    background-color: var(--green);
+    margin: 10px;
+    border: 1px solid var(--green);
+    border-radius: 20px;
+}
+
+.fav-button:hover,.fav-button::after,.fav-button:active,.fav-button:focus {
+    background-color: var(--green);
+    border: 2px solid var(--green);
+}
+
+.fav-button:disabled {
+    background-color: lightgrey;
+}
+
+.close-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 36px;
+    color: var(--green);
+}

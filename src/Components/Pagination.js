@@ -27,10 +27,13 @@ function Pagination(props) {
 
     return (
         <React.Fragment>
-            <p className="inline">Rows per page: <span><input type="number" onChange={handleRowsInput} value={rowsPerPage} style={{ width: "30px" }}></input></span></p>
-            <button className="inline" onClick={handlePrevButton}>PREV</button>
-            <p className="inline">{props.lower + " - " + (props.upper < props.filteredBankList.length ? props.upper : props.filteredBankList.length) + " of " + props.filteredBankList.length}</p>
-            <button className="inline" onClick={handleNextButton}>NEXT</button>
+            <div className="pagination-root">
+                <p className="inline">Rows per page: <span><input type="number" onChange={handleRowsInput} value={rowsPerPage} style={{ width: "50px" }}></input></span></p>
+                <p className="inline arrow-button" onClick={handlePrevButton}><i class='fas fa-angle-left'></i></p>
+                <p className="inline arrow-button"><i class="arrow right"></i></p>
+                <p className="inline">{props.lower + " - " + (props.upper < props.filteredBankList.length ? props.upper : props.filteredBankList.length) + " of " + props.filteredBankList.length}</p>
+                <p className="inline arrow-button" onClick={handleNextButton}><i class='fas fa-angle-right'></i></p>
+            </div>
         </React.Fragment>
     )
 }

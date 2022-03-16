@@ -1,5 +1,31 @@
 
+:root {
+    --green: #00C897;
+    --white: #ffffff; 
+}
+
 .inline {
     display: inline;
     margin: 3px;
+}
+
+.pagination-root {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.arrow-button {
+    font-size: 40px;
+    color: var(--green);
+}
+
+@media screen and (max-width: 768px) {
+    .arrow-button {
+        font-size: 30px;
+        color: var(--white);
+    }
+    .pagination-root {
+        display: block;
+    }
 }

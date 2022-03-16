@@ -4,47 +4,51 @@ import { useNavigate } from "react-router-dom";
 import APIService from "../APIs/APIService";
 import MobileRowView from "../Components/MobileRowView";
 import Pagination from "../Components/Pagination";
-import BanksContext from "../Contexts/BanksContext";
-import './AllBanksPage.css'
+import "./TableView.css";
 
 
-function AllBanksPage(props) {
+function TableView(props) {
 
     const navigate = useNavigate();
 
-    const { city, setCity, setBanks, loading } = React.useContext(BanksContext)
-    // const [city, setCity] = React.useState("BENGALURU");
+    const [city, setCity] = React.useState("BENGALURU");
     const [bankList, setBankList] = React.useState([]);
     const [filteredBankList, setFilteredBankList] = React.useState([]);
     const [searchCategory, setSearchCategory] = React.useState("IFSC");
     const [pagination, setPagination] = React.useState({ lower: 1, upper: 10 });
     const { lower, upper } = pagination;
+    // var favorites = null;
+    
 
 
     React.useEffect(() => {
-        console.log(city)
         const banks = localStorage.getItem(city)
-        if (banks != null) {
+        if(banks){
             setBankList(JSON.parse(banks));
-            setFilteredBankList(JSON.parse(banks))
+            // setFilteredBankList(JSON.parse(banks))
         }
-        APIService.getBankData(city, (response) => {
-            if (response.status === 200) {
-                response.json().then(value => {
-                    setBankList(value);
-                    setBanks(value);
-                    setCity(city)
-                    localStorage.setItem(city, JSON.stringify(value));
-                    localStorage.setItem("currentCity", city);
-                    setFilteredBankList(value);
-                })
+        if(localStorage.getItem("favorites")!=null){
+            var favorites = JSON.parse(localStorage.getItem("favorites"));
+            if(favorites[city]!=null){
+                const b = JSON.parse(banks);
+                setFilteredBankList(b.filter((val)=>{return favorites[city].includes(val.ifsc)}));
             }
-        })
+        }
+        // APIService.getBankData(city, (response) => {
+        //     if (response.status === 200) {
+        //         response.json().then(value => {
+        //             setBankList(value);
+        //             localStorage.setItem(city,JSON.stringify(value));
+        //             localStorage.setItem("currentCity", city);
+        //             setFilteredBankList(value);
+        //         })
+        //     }
+        // })
         return () => {
             setBankList([]);
             setFilteredBankList([]);
         }
-    }, [city, setBanks, setCity])
+    }, [city])
 
 
     const handleBankCityChange = (e) => {
@@ -63,9 +67,9 @@ function AllBanksPage(props) {
         setFilteredBankList(bankList.filter(bank => { return bank[searchCategory.toLowerCase()].toString().includes(e.target.value.toUpperCase()) }))
     }
 
-    const handleRowClick = (ifsc_code) => () => {
-        localStorage.setItem("currentCity", city)
-        navigate("/find-my-bank/bank-details/" + ifsc_code)
+    const handleRowClick = (ifsc_code) => ()=> {
+        localStorage.setItem("currentCity",city)
+        navigate("/find-my-bank/bank-details/"+ifsc_code)
     }
 
     return (
@@ -74,17 +78,17 @@ function AllBanksPage(props) {
                 {/* <p className="inline">All Banks</p> */}
 
                 <div className="filter-sub-div">
-                    <select name="banks" id="banks" value={city} onChange={handleBankCityChange}>
+                    <select name="banks" id="banks" onChange={handleBankCityChange}>
                         {APIService.cities.map((val) => {
                             return (<option key={val} value={val} id={val}>{val}</option>)
                         })}
                     </select>
-                    <select name="category" id="category" onChange={handleCategoryChange}>
+                    <select disabled={true} name="category" id="category" onChange={handleCategoryChange}>
                         {APIService.categories.map((val) => {
                             return (<option key={val} value={val} id={val}>{val.toUpperCase()}</option>)
                         })}
                     </select>
-                    <input className="search-field" type="text" id="search-field" placeholder="search" onChange={handleSearchInputChange}></input>
+                    <input disabled={true} className="search-field" type="text" id="search-field" placeholder="search" onChange={handleSearchInputChange}></input>
                 </div>
             </div>
 
@@ -101,7 +105,6 @@ function AllBanksPage(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {loading && <tr><td colSpan={5}><p style={{ textAlign: "center" }}>loading</p></td></tr>}
                             {filteredBankList.slice(lower - 1, upper).map((val) => {
                                 return (<tr key={val.ifsc} onClick={handleRowClick(val.ifsc)}>
                                     <td>{val.bank_name}</td>
@@ -135,4 +138,4 @@ function AllBanksPage(props) {
     )
 }
 
-export default AllBanksPage;
+export default TableView;

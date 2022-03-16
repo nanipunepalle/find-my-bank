@@ -1,6 +1,7 @@
 
 :root {
     --green: #00C897;
+    --lightgreen: #00C897;
     --white: #ffffff; 
 }
 
@@ -44,7 +45,6 @@ th {
     position:sticky;
     top:0px;
     background-color: var(--green);
-    color: var(--white);
 }
 
 th,td {
@@ -91,7 +91,6 @@ select {
     padding: 5px;
     margin: 5px; 
 }
-
 .mobile-div {
     display: none;
 }
