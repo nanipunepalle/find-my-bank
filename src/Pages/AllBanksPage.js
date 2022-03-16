@@ -8,6 +8,7 @@ import BanksContext from "../Contexts/BanksContext";
 import './AllBanksPage.css'
 
 
+
 function AllBanksPage(props) {
 
     const navigate = useNavigate();
@@ -120,6 +121,19 @@ function AllBanksPage(props) {
                 </div>
             </div>
             <div className="mobile-div">
+                <div className="mobile-filter-sub-div">
+                    <select name="banks" id="banks" value={city} onChange={handleBankCityChange}>
+                        {APIService.cities.map((val) => {
+                            return (<option key={val} value={val} id={val}>{val}</option>)
+                        })}
+                    </select>
+                    <select name="category" id="category" onChange={handleCategoryChange}>
+                        {APIService.categories.map((val) => {
+                            return (<option key={val} value={val} id={val}>{val.toUpperCase()}</option>)
+                        })}
+                    </select>
+                    <input className="search-field" type="text" id="search-field" placeholder="search" onChange={handleSearchInputChange}></input>
+                </div>
                 <div>
                     {
                         filteredBankList.slice(lower - 1, upper).map(val => {

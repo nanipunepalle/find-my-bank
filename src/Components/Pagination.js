@@ -1,5 +1,9 @@
 import React from "react";
 
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import IconButton from '@material-ui/core/IconButton';
+
 import './Pagination.css';
 function Pagination(props) {
 
@@ -28,11 +32,15 @@ function Pagination(props) {
     return (
         <React.Fragment>
             <div className="pagination-root">
-                <p className="inline">Rows per page: <span><input type="number" onChange={handleRowsInput} value={rowsPerPage} style={{ width: "50px" }}></input></span></p>
-                <p className="inline arrow-button" onClick={handlePrevButton}><i class='fas fa-angle-left'></i></p>
-                <p className="inline arrow-button"><i class="arrow right"></i></p>
-                <p className="inline">{props.lower + " - " + (props.upper < props.filteredBankList.length ? props.upper : props.filteredBankList.length) + " of " + props.filteredBankList.length}</p>
-                <p className="inline arrow-button" onClick={handleNextButton}><i class='fas fa-angle-right'></i></p>
+                <p className="inline txt">Rows per page: <span><input type="number" onChange={handleRowsInput} value={rowsPerPage} style={{ width: "50px" }}></input></span></p>
+                <IconButton>
+                    <ChevronLeftIcon className="inline arrow-button" onClick={handlePrevButton} fontSize="large"></ChevronLeftIcon>
+                </IconButton>
+                <p className="inline txt">{props.lower + " - " + (props.upper < props.filteredBankList.length ? props.upper : props.filteredBankList.length) + " of " + props.filteredBankList.length}</p>
+                {/* <p className="inline arrow-button" onClick={handleNextButton}><i class='fas fa-angle-right'></i></p> */}
+                <IconButton>
+                    <ChevronRightIcon className="inline arrow-button" onClick={handleNextButton} fontSize="large"></ChevronRightIcon>
+                </IconButton>
             </div>
         </React.Fragment>
     )

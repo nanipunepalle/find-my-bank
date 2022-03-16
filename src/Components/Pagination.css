@@ -28,4 +28,7 @@
     .pagination-root {
         display: block;
     }
+    .txt {
+        font-size: smaller;
+    }
 }
