@@ -1,0 +1,32 @@
+:root {
+    --green: #00C897;
+    --white: #ffffff; 
+}
+
+.top-nav-bar {
+    /* background-color:var(--green); */
+    padding: 1px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    clear: both;
+    width: 100%;
+    /* display: inline; */
+}
+
+.page-title {
+    /* text-align: center; */
+    float: left;
+    display: inline;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.menu-links {
+    display: inline;
+    color: var(--green);
+    padding: 5px;
+    /* text-align: end; */
+    margin-right: 30px;
+    float: right;
+}
