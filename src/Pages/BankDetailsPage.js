@@ -1,9 +1,9 @@
-import { IconButton } from "@material-ui/core";
+// import { IconButton } from "@material-ui/core";
 import React from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import MobileRowView from "../Components/MobileRowView";
 import './BankDetailsPage.css';
-import Close from '@material-ui/icons/Close';
+// import Close from '@material-ui/icons/Close';
 
 function BankDetailsPage(props) {
     const { ifsc } = useParams();
@@ -72,7 +72,7 @@ function BankDetailsPage(props) {
             </div>
             <div style={{ clear: "both" }}></div>
             {/* <span className="close-icon" onClick={handleCloseButton}><i class="fa fa-close"></i></span> */}
-            <IconButton onClick={handleCloseButton} ><Close fontSize="large" className="close-icon" ></Close></IconButton>
+            {/* <IconButton onClick={handleCloseButton} ><Close fontSize="large" className="close-icon" ></Close></IconButton> */}
             <MobileRowView bank={bank}></MobileRowView>
             <button className="btn btn-primary fav-button" onClick={handleFavoriteButton}>{added ? "Remove from Favorites" : "Add To Favorites"}</button>
         </div>
