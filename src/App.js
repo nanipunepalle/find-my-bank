@@ -16,6 +16,7 @@ function App() {
           <Route exact path="/find-my-bank/bank-details/:ifsc" element={<BankDetailsPage></BankDetailsPage>}></Route>
           {/* <Route exact path="/*" element={<Navigate replace to="/"></Navigate>}></Route> */}
           <Route exact path="*" element={<Navigate replace to="/"></Navigate>}></Route>
+          {/* <Route exact path="/find"></Route> */}
         </Routes>
       </Router>
     </div>
