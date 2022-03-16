@@ -1,6 +1,5 @@
 :root {
     --green: #00C897;
-    --lightgreen: #00C897;
     --white: #ffffff; 
 }
 
@@ -10,6 +9,7 @@
     margin: 10px;
     border: 1px solid var(--green);
     border-radius: 20px;
+    color: var(--white);
 }
 
 .fav-button:hover,.fav-button::after,.fav-button:active,.fav-button:focus {
