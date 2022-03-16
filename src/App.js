@@ -9,11 +9,12 @@ import BankDetailsPage from './Pages/BankDetailsPage';
 function App() {
   return (
     <div>
-      <Router basename='/find-my-bank'>
+      <Router>
         <Routes>
-          <Route exact path="/" element={<Navigate replace to="/all-banks"></Navigate>}></Route>
-          <Route exact path="/all-banks" element={<Home></Home>}></Route>
-          <Route exact path="/bank-details/:ifsc" element={<BankDetailsPage></BankDetailsPage>}></Route>
+          <Route exact path="/" element={<Navigate replace to="/find-my-bank/all-banks"></Navigate>}></Route>
+          <Route exact path="/find-my-bank/all-banks" element={<Home></Home>}></Route>
+          <Route exact path="/find-my-bank/bank-details/:ifsc" element={<BankDetailsPage></BankDetailsPage>}></Route>
+          {/* <Route exact path="/*" element={<Navigate replace to="/"></Navigate>}></Route> */}
           <Route exact path="*" element={<Navigate replace to="/"></Navigate>}></Route>
         </Routes>
       </Router>

@@ -60,7 +60,7 @@ function AllBanksPage(props) {
 
     const handleRowClick = (ifsc_code) => ()=> {
         localStorage.setItem("currentCity",city)
-        navigate("/bank-details/"+ifsc_code)
+        navigate("/find-my-bank/bank-details/"+ifsc_code)
     }
 
     return (
