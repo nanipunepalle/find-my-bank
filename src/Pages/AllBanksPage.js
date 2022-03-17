@@ -37,7 +37,7 @@ function AllBanksPage(props) {
             setBankList(JSON.parse(banks));
             setFilteredBankList(JSON.parse(banks))
         }
-        APIService.getBankData(city, (response) => {
+        APIService.getBankData(city, (message,response) => {
             if (response.status === 200) {
                 response.json().then(value => {
                     setBankList(value);
@@ -48,11 +48,20 @@ function AllBanksPage(props) {
                     setFilteredBankList(value);
                 })
             }
+            else {
+                setState({
+                    ...state,
+                    open: true,
+                    message: "Something went wrong try again",
+                    type: "error",
+                })
+            }
         })
         return () => {
             setBankList([]);
             setFilteredBankList([]);
         }
+        // eslint-disable-next-line
     }, [city, setBanks, setCity])
 
 
@@ -68,8 +77,8 @@ function AllBanksPage(props) {
 
     const handleSearchInputChange = (e) => {
         setPagination({ lower: 1, upper: 10 });
-        if(searchCategory==="IFSC"){
-            if(e.target.value.length>11){
+        if (searchCategory === "IFSC") {
+            if (e.target.value.length > 11) {
                 setState({
                     ...state,
                     open: true,

@@ -107,6 +107,8 @@ select {
     padding: 5px;
     border-radius: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .mobile-filter-sub-div {

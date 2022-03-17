@@ -7,19 +7,29 @@ import Home from './Pages/Home';
 import BankDetailsPage from './Pages/BankDetailsPage';
 import BanksContext from './Contexts/BanksContext';
 import APIService from './APIs/APIService';
+import AlertToast from './Components/AlertToast';
 
 function App() {
 
   const [banks, setBanks] = React.useState([]);
   const [city, setCity] = React.useState("BENGALURU");
   const [loading, setLoading] = React.useState(false);
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+    message: 'success',
+    type: 'error'
+});
 
   const contextValue = { banks, setBanks, city, setCity, loading, setLoading };
 
   React.useEffect(() => {
     setLoading(true);
-    APIService.getBankData(city, (response) => {
-      if (response.status === 200) {
+    APIService.getBankData(city, (message,response) => {
+      console.log(response.status)
+      // if(message=="success")
+      if (message==="success" && response.status === 200) {
         response.json().then(value => {
           setBanks(value);
           localStorage.setItem(city, JSON.stringify(value));
@@ -30,12 +40,20 @@ function App() {
       }
       else {
         setLoading(false);
+      //   setState({
+      //     ...state,
+      //     open: true,
+      //     message: "Something went wrong try again",
+      //     type: "error",
+      // })
       }
     })
+    // eslint-disable-next-line
   }, [city])
 
   return (
     <div>
+      <AlertToast state={state} setState={setState}></AlertToast>
       <Router>
         <BanksContext.Provider value={contextValue}>
           <Routes>
